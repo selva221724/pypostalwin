@@ -1,10 +1,11 @@
-# pypostalwin
+# pypostalwin 
+
+[<img src="https://img.shields.io/static/v1?label=license&message=MIT&color=green">](https://opensource.org/licenses/MIT)
 
 pypostalwin is the Un-Official Python wrapper to [libpostal](https://github.com/openvenues/libpostal), a fast statistical parser/normalizer for street addresses anywhere in the world.
 
 <!---[<img src="https://img.shields.io/pypi/v/edaSQL">](https://pypi.org/project/edaSQL/)
 [<img src="https://img.shields.io/readthedocs/edasql">](https://edasql.readthedocs.io/en/latest/)
-[<img src="https://img.shields.io/static/v1?label=license&message=MIT&color=green">](https://opensource.org/licenses/MIT)
 <img src="https://img.shields.io/pypi/wheel/edaSQL">
 <img src = "https://img.shields.io/pypi/pyversions/edaSQL">
 <img src = "https://img.shields.io/github/commit-activity/w/selva221724/edaSQL">
