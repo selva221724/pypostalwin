@@ -14,6 +14,12 @@ pypostalwin is the Un-Official Python wrapper to [libpostal](https://github.com/
 libpostal is a C library for parsing/normalizing street addresses around the world using statistical NLP and open data. The goal of this project is to understand location-based strings in every language, everywhere.
 
 ## Installation
+
+### 1. Build the libpostal in windows
+Before usign the Python wrapper, you need to build the libpostal C library as a bundle which can be accessed by the python package. 
+
+[Please follow the Instructions given in the Repository](https://pypi.org/project/pypostalwin/)
+
 <!---Install dependency Packages before installing edaSQL
 ```shell
 pip install pyodbc
@@ -23,7 +29,7 @@ Optional dependency for better visualization - [Jupyter Notebook](https://jupyte
 ```shell
 pip install notebook
 ```--->
-
+### 2 . Install the python wrapper 
 **Install using pip** . [Offical Python Package Here!!](https://pypi.org/project/pypostalwin/)
 ```shell
 pip install pypostalwin
