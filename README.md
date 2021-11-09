@@ -37,9 +37,7 @@ python setup.py install
 
 ## Documentation
 
-<img src="https://blog.readthedocs.com/_static/logo-opengraph.png"  width="20%" height="20%">
-
-[Read the detailed documentation in readthedocs.io](https://pypostalwin.readthedocs.io/en/latest/)
+[<img src="https://blog.readthedocs.com/_static/logo-opengraph.png"  width="20%" height="20%">](https://pypostalwin.readthedocs.io/en/latest/)
 
 
 ## Usage
