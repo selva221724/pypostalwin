@@ -20,15 +20,6 @@ Before usign the Python wrapper, you need to build the libpostal C library as a 
 
 [Please follow the Instructions given in the Repository](https://pypi.org/project/pypostalwin/)
 
-<!---Install dependency Packages before installing edaSQL
-```shell
-pip install pyodbc
-pip install ipython
-```
-Optional dependency for better visualization - [Jupyter Notebook](https://jupyter.org/install) 
-```shell
-pip install notebook
-```--->
 ### 2 . Install the python wrapper 
 **Install using pip** . [Offical Python Package Here!!](https://pypi.org/project/pypostalwin/)
 ```shell
@@ -50,31 +41,23 @@ python setup.py install
 [Read the detailed documentation in readthedocs.io](https://pypostalwin.readthedocs.io/en/latest/)
 
 
-<!---## edaSQL Jupyter NoteBook Tutorial
+## Usage
 
-### Import Packages
+### Import Package
 ```python
-import edaSQL
-import pandas as pd
+import pypostalwin
 ```
 
-### 1. Connect to the DataBase
+### 1. Initialize the Address Parser Object
 ```python
-edasql = edaSQL.SQL()
-edasql.connectToDataBase(server='your server name', 
-                         database='your database', 
-                         user='username', 
-                         password='password',
-                         sqlDriver='ODBC Driver 17 for SQL Server')
+parser = pypostalwin.AddressParser()
+parser.runParser("The White House 1600 Pennsylvania Avenue NW, Washington, DC 20500, USA")
 ```
 
 <img src="https://raw.githubusercontent.com/selva221724/edaSQL/main/readme_src/notebook_results/db_connected.png">
 
-### 2. Query Data 
+### 2. Terminate the Address Parser Object
 ```python
-sampleQuery = "select  * from INX"
-data = pd.read_sql(sampleQuery, edasql.dbConnection)
+parser.terminateParser()
 ```
-<img src="https://raw.githubusercontent.com/selva221724/edaSQL/main/readme_src/notebook_results/data_sample.png">
 
---->
