@@ -54,7 +54,7 @@ parser = pypostalwin.AddressParser()
 parser.runParser("The White House 1600 Pennsylvania Avenue NW, Washington, DC 20500, USA")
 ```
 
-<img src="https://raw.githubusercontent.com/selva221724/edaSQL/main/readme_src/notebook_results/db_connected.png">
+<img src="https://raw.githubusercontent.com/selva221724/pypostalwin/main/readme_src/1.png">
 
 ### 2. Terminate the Address Parser Object
 ```python
