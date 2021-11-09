@@ -49,15 +49,23 @@ python setup.py install
 import pypostalwin
 ```
 
-### 1. Initialize the Address Parser Object
+### 1. Initialize Address Parser Object
 ```python
 parser = pypostalwin.AddressParser()
-parser.runParser("The White House 1600 Pennsylvania Avenue NW, Washington, DC 20500, USA")
+parsedAddress = parser.runParser("The White House 1600 Pennsylvania Avenue NW, Washington, DC 20500, USA")
+print(parsedAddress)
+```
+```sh
+{'house': 'the white house',
+ 'house_number': '1600',
+ 'road': 'pennsylvania avenue nw',
+ 'city': 'washington',
+ 'state': 'dc',
+ 'postcode': '20500',
+ 'country': 'usa'}
 ```
 
-<img src="https://raw.githubusercontent.com/selva221724/pypostalwin/main/readme_src/1.png">
-
-### 2. Terminate the Address Parser Object
+### 2. Terminate Address Parser Object
 ```python
 parser.terminateParser()
 ```
