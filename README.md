@@ -1,35 +1,29 @@
-<p align="center">
-  <img src="https://raw.githubusercontent.com/selva221724/edaSQL/main/readme_src/sql_logo_smaller.png" width="70%" height="70%" >
-  <br><br>
-</p>
+# pypostalwin
 
-[<img src="https://img.shields.io/pypi/v/edaSQL">](https://pypi.org/project/edaSQL/)
+pypostalwin is the Un-Official Python wrapper to [libpostal](https://github.com/openvenues/libpostal), a fast statistical parser/normalizer for street addresses anywhere in the world.
+
+<!---[<img src="https://img.shields.io/pypi/v/edaSQL">](https://pypi.org/project/edaSQL/)
 [<img src="https://img.shields.io/readthedocs/edasql">](https://edasql.readthedocs.io/en/latest/)
 [<img src="https://img.shields.io/static/v1?label=license&message=MIT&color=green">](https://opensource.org/licenses/MIT)
 <img src="https://img.shields.io/pypi/wheel/edaSQL">
 <img src = "https://img.shields.io/pypi/pyversions/edaSQL">
 <img src = "https://img.shields.io/github/commit-activity/w/selva221724/edaSQL">
-<img src = "https://img.shields.io/github/languages/code-size/selva221724/edaSQL">
+<img src = "https://img.shields.io/github/languages/code-size/selva221724/edaSQL">--->
 
-## SQL Bridge Tool to Exploratory Data Analysis  
-
-
-**edaSQL** is a library to link SQL to **Exploratory Data Analysis** and further more in the Data Engineering. This will solve many limitations in the SQL studios available in the market. Use the SQL Query language to get your Table Results. 
+## About libpostal
+libpostal is a C library for parsing/normalizing street addresses around the world using statistical NLP and open data. The goal of this project is to understand location-based strings in every language, everywhere.
 
 ## Installation
-Install dependency Packages before installing edaSQL
-```shell
-pip install pyodbc
-pip install ipython
-```
-Optional dependency for better visualization - [Jupyter Notebook](https://jupyter.org/install) 
-```shell
-pip install notebook
-```
 
-**Now Install using pip** . [Offical Python Package Here!!](https://pypi.org/project/edaSQL/)
+### 1. Build the libpostal in windows
+Before usign the Python wrapper, you need to build the libpostal C library as a bundle which can be accessed by the python package. 
+
+[Please follow the Instructions given in the Repository](https://pypi.org/project/pypostalwin/)
+
+### 2 . Install the python wrapper 
+**Install using pip** . [Offical Python Package Here!!](https://pypi.org/project/pypostalwin/)
 ```shell
-pip install edaSQL
+pip install pypostalwin
 ```
 
 (OR)
@@ -44,101 +38,26 @@ python setup.py install
 
 <img src="https://blog.readthedocs.com/_static/logo-opengraph.png"  width="20%" height="20%">
 
-[Read the detailed documentation in readthedocs.io](https://edasql.readthedocs.io/en/latest/)
+[Read the detailed documentation in readthedocs.io](https://pypostalwin.readthedocs.io/en/latest/)
 
 
-## edaSQL Jupyter NoteBook Tutorial
+## Usage
 
-### Import Packages
+### Import Package
 ```python
-import edaSQL
-import pandas as pd
+import pypostalwin
 ```
 
-### 1. Connect to the DataBase
+### 1. Initialize the Address Parser Object
 ```python
-edasql = edaSQL.SQL()
-edasql.connectToDataBase(server='your server name', 
-                         database='your database', 
-                         user='username', 
-                         password='password',
-                         sqlDriver='ODBC Driver 17 for SQL Server')
+parser = pypostalwin.AddressParser()
+parser.runParser("The White House 1600 Pennsylvania Avenue NW, Washington, DC 20500, USA")
 ```
 
 <img src="https://raw.githubusercontent.com/selva221724/edaSQL/main/readme_src/notebook_results/db_connected.png">
 
-### 2. Query Data 
+### 2. Terminate the Address Parser Object
 ```python
-sampleQuery = "select  * from INX"
-data = pd.read_sql(sampleQuery, edasql.dbConnection)
-```
-<img src="https://raw.githubusercontent.com/selva221724/edaSQL/main/readme_src/notebook_results/data_sample.png">
-
-### 3. Data Overview
-```python
-insights =  edaSQL.EDA(dataFrame=data,HTMLDisplay=True)
-dataInsights =insights.dataInsights()
+parser.terminateParser()
 ```
 
-<img src="https://raw.githubusercontent.com/selva221724/edaSQL/main/readme_src/notebook_results/1.png">
-
-```python
-deepInsights = insights.deepInsights()
-```
-<img src="https://raw.githubusercontent.com/selva221724/edaSQL/main/readme_src/notebook_results/2.png">
-
-### 4. Correlation
-```python
-eda = edaSQL.EDA(dataFrame=data)
-eda.pearsonCorrelation()
-```
-<img src="https://raw.githubusercontent.com/selva221724/edaSQL/main/readme_src/notebook_results/3.png">
-
-```python
-eda.spearmanCorrelation()
-```
-<img src="https://raw.githubusercontent.com/selva221724/edaSQL/main/readme_src/notebook_results/4.png">
-
-```python
-eda.kendallCorrelation()
-```
-<img src="https://raw.githubusercontent.com/selva221724/edaSQL/main/readme_src/notebook_results/5.png">
-
-### 5. Missing Values
-
-```python
-eda.missingValuesPlot(plot ='matrix')
-```
-<img src="https://raw.githubusercontent.com/selva221724/edaSQL/main/readme_src/notebook_results/6.png">
-
-```python
-eda.missingValuesPlot(plot ='bar')
-```
-<img src="https://raw.githubusercontent.com/selva221724/edaSQL/main/readme_src/notebook_results/7.png">
-
-```python
-eda.missingValuesPlot(plot ='heatmap')
-```
-<img src="https://raw.githubusercontent.com/selva221724/edaSQL/main/readme_src/notebook_results/8.png">
-
-```python
-eda.missingValuesPlot(plot ='dendrogram')
-```
-<img src="https://raw.githubusercontent.com/selva221724/edaSQL/main/readme_src/notebook_results/9.png">
-
-### 6. Outliers 
-
-```python
-eda.outliersVisualization(plot = 'box')
-```
-<img src="https://raw.githubusercontent.com/selva221724/edaSQL/main/readme_src/notebook_results/10.png">
-
-```python
-eda.outliersVisualization(plot = 'scatter')
-```
-<img src="https://raw.githubusercontent.com/selva221724/edaSQL/main/readme_src/notebook_results/11.png">
-
-```python
-outliers = eda.getOutliers()
-```
-<img src="https://raw.githubusercontent.com/selva221724/edaSQL/main/readme_src/notebook_results/12.png">
