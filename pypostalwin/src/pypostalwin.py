@@ -20,7 +20,7 @@ def removeSpeacialChars(address):
     return address
 
 
-class LibPostalWrapper:
+class AddressParser:
 
     def __init__(self):
         self.exePath = r"C:\Workbench\libpostal\src\address_parser.exe"
@@ -49,3 +49,6 @@ class LibPostalWrapper:
 
 # lp = LibPostalWrapper()
 # parsedAddress = lp.runParser('number 2 , flat 3 , kunju rd, Mumbai, India')
+
+# parser = pypostalwin.AddressParser()
+# parser.runParser("Input Your Address Here")
