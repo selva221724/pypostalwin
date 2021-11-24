@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="pypostalwin",  # This is the name of the package
-    version="0.0.1",  # The initial release version
+    version="0.0.2",  # The initial release version
     author="Tamil Selvan A V",  # Full name of the author
     description=" python package for libpostal wrapper only for windows",
     url="https://github.com/selva221724/pypostalwin",
