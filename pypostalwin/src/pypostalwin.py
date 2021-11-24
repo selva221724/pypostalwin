@@ -1,9 +1,24 @@
 from subprocess import Popen, PIPE
 
 
+def stringToJSON(string):
+    if not string in ['{}']:
+        string = string.replace('{  ', '')
+        string = string.replace('}', '')
+        string = string.replace('"', '')
+        string = string.split(",  ")
+        stringList = [i.split(': ') for i in string]
+        outDictList = []
+        for i in stringList:
+            outDictList.append({i[0]: i[1].rstrip().lstrip()})
+        return outDictList
+    else:
+        return {}
+
+
 def outputStripper(result):
     result = result.split('Result:\n\n')[1].split('\n\n> ')[0].replace('\n', '')
-    result = eval(result)
+    result = stringToJSON(result)
     return result
 
 
@@ -14,7 +29,7 @@ def removeSpeacialChars(address):
          'μ': '', 'σ': '', 'ρ': '', 'λ': '', 'χ': '', '⊄': '', '⊆': '', '⊂': '', '⊇': '', '⊅': '', '⊖': '',
          '∈': '', '∉': '', '⊕': '', '⇒': '', '⇔': '', '↔': '', '∀': '', '∃': '', '∄': '', '∴': '', '∵': '',
          'ε': '', '∫': '', '∮': '', '∯': '', '∰': '', 'δ': '', 'ψ': '', 'Θ': '', 'θ': '', 'α': '', 'β': '',
-         'ζ': '', 'η': '', 'ι': '', 'κ': '', 'ξ': '', 'τ': '', 'ω': '', '∇':''}
+         'ζ': '', 'η': '', 'ι': '', 'κ': '', 'ξ': '', 'τ': '', 'ω': '', '∇': ''}
     for x, y in b.items():
         address = address.replace(x, y)
     return address
@@ -30,7 +45,7 @@ class AddressParser:
 
     def runParser(self, address):
         address = removeSpeacialChars(address)
-        address = address + ' \n'
+        address = address + '\n'
         self.process.stdin.write(address)
         self.process.stdin.flush()
 
@@ -45,10 +60,4 @@ class AddressParser:
     def terminateParser(self):
         self.process.stdin.close()
         self.process.terminate()
-        self.process.wait(timeout=0.2)
-
-# lp = LibPostalWrapper()
-# parsedAddress = lp.runParser('number 2 , flat 3 , kunju rd, Mumbai, India')
-
-# parser = pypostalwin.AddressParser()
-# parser.runParser("Input Your Address Here")
+        self.process.wait()
