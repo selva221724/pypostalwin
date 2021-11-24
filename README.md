@@ -53,14 +53,18 @@ parser = pypostalwin.AddressParser()
 parsedAddress = parser.runParser("The White House 1600 Pennsylvania Avenue NW, Washington, DC 20500, USA")
 print(parsedAddress)
 ```
+output
 ```sh
-{'house': 'the white house',
- 'house_number': '1600',
- 'road': 'pennsylvania avenue nw',
- 'city': 'washington',
- 'state': 'dc',
- 'postcode': '20500',
- 'country': 'usa'}
+[
+  {'house': 'the white house'}, 
+  {'house_number': '1600'},
+  {'road': 'pennsylvania avenue nw'}, 
+  {'city': 'washington'}, 
+  {'state': 'dc'}, 
+  {'postcode': '20500'}, 
+  {'country': 'usa'}
+]
+
 ```
 
 ### 2. Terminate Address Parser Object
