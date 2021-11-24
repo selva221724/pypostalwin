@@ -66,6 +66,17 @@ output
 ]
 
 ```
+**Note:** In a single runtime, the first-time parser.runParser() will take a few seconds to run since it is loading the models from libpostal in the backend process. Once it is loaded, the recurrent runs will be faster as usual. You need to use the same object instance to get the results faster.
+
+for eg:
+
+```python
+parser = pypostalwin.AddressParser()
+parsedAddress1 = parser.runParser("The White House 1600") #only first time will take few seconds to load
+parsedAddress2 = parser.runParser("Washington, DC 20500, USA") #will be faster as usual
+parsedAddress3 = parser.runParser(" 20500, USA") #will be faster as usual
+parsedAddress4 = parser.runParser("Pennsylvania Avenue NW, Washington,") #will be faster as usual
+```
 
 ### 2. Terminate Address Parser Object
 ```python
