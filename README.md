@@ -1,15 +1,15 @@
 # pypostalwin 
 
+
+[<img src="https://img.shields.io/pypi/v/pypostalwin">](https://pypi.org/project/pypostalwin/)
 [<img src="https://img.shields.io/static/v1?label=license&message=MIT&color=green">](https://opensource.org/licenses/MIT)
+<img src="https://img.shields.io/pypi/wheel/pypostalwin">
+<img src = "https://img.shields.io/pypi/pyversions/pypostalwin">
+<img src = "https://img.shields.io/github/commit-activity/w/selva221724/pypostalwin">
+<img src = "https://img.shields.io/github/languages/code-size/selva221724/pypostalwin">
 
 pypostalwin is the Un-Official Python wrapper to [libpostal](https://github.com/openvenues/libpostal), a fast statistical parser/normalizer for street addresses anywhere in the world.
 
-<!---[<img src="https://img.shields.io/pypi/v/edaSQL">](https://pypi.org/project/edaSQL/)
-[<img src="https://img.shields.io/readthedocs/edasql">](https://edasql.readthedocs.io/en/latest/)
-<img src="https://img.shields.io/pypi/wheel/edaSQL">
-<img src = "https://img.shields.io/pypi/pyversions/edaSQL">
-<img src = "https://img.shields.io/github/commit-activity/w/selva221724/edaSQL">
-<img src = "https://img.shields.io/github/languages/code-size/selva221724/edaSQL">--->
 
 ## About libpostal
 libpostal is a C library for parsing/normalizing street addresses around the world using statistical NLP and open data. The goal of this project is to understand location-based strings in every language, everywhere.
