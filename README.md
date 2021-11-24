@@ -1,8 +1,8 @@
 # pypostalwin 
 
-
 [<img src="https://img.shields.io/pypi/v/pypostalwin">](https://pypi.org/project/pypostalwin/)
 [<img src="https://img.shields.io/static/v1?label=license&message=MIT&color=green">](https://opensource.org/licenses/MIT)
+<img src = "https://img.shields.io/badge/Operating%20system-Windows-blue">
 <img src="https://img.shields.io/pypi/wheel/pypostalwin">
 <img src = "https://img.shields.io/pypi/pyversions/pypostalwin">
 <img src = "https://img.shields.io/github/commit-activity/w/selva221724/pypostalwin">
