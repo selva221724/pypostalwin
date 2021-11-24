@@ -8,7 +8,7 @@
 <img src = "https://img.shields.io/github/commit-activity/w/selva221724/pypostalwin">
 <img src = "https://img.shields.io/github/languages/code-size/selva221724/pypostalwin">
 
-pypostalwin is the Un-Official Python wrapper to [libpostal](https://github.com/openvenues/libpostal), a fast statistical parser/normalizer for street addresses anywhere in the world.
+pypostalwin is the Un-Official Python wrapper to [libpostal](https://github.com/openvenues/libpostal) only for Windows, a fast statistical parser/normalizer for street addresses anywhere in the world.
 
 
 ## About libpostal
