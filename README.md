@@ -17,9 +17,14 @@ libpostal is a C library for parsing/normalizing street addresses around the wor
 ## Installation
 
 ### 1. Build the libpostal in windows
-Before usign the Python wrapper, you need to build the libpostal C library as a bundle which can be accessed by the python package. 
+- Before usign the Python wrapper, you need to build the libpostal C library as a bundle which can be accessed by the python package. (still under development) 
 
-[Please follow the Instructions given in the Repository](https://pypi.org/project/pypostalwin/)
+(OR)
+
+- You can use the prebuild bundle zipped file [Download here](https://drive.google.com/file/d/1fZUlyLFCGYD7l_PDM0NzD8pAo-ICrVVd/view?usp=sharing)  
+- Unpack the zip to C:\Workbench\libpostal\
+- If you dont have **Workbench** folder in C Drive, then create one. 
+- Copy the zip inside the **Workbench** and unzip using [7zip](https://www.7-zip.org/download.html) 
 
 ### 2 . Install the python wrapper 
 **Install using pip** . [Offical Python Package Here!!](https://pypi.org/project/pypostalwin/)
