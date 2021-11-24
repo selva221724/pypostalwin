@@ -35,11 +35,6 @@ Clone this Repository. Run this from the root directory to install
 python setup.py install
 ```
 
-## Documentation
-
-[<img src="https://blog.readthedocs.com/_static/logo-opengraph.png"  width="20%" height="20%">](https://pypostalwin.readthedocs.io/en/latest/)
-
-
 ## Usage
 
 ### Import Package
