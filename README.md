@@ -21,7 +21,7 @@ libpostal is a C library for parsing/normalizing street addresses around the wor
 
 (OR)
 
-- You can use the prebuild bundle zipped file [Download here](https://drive.google.com/file/d/1fZUlyLFCGYD7l_PDM0NzD8pAo-ICrVVd/view?usp=sharing)  
+- You can use the prebuilt bundle zipped file [Download here](https://drive.google.com/file/d/1fZUlyLFCGYD7l_PDM0NzD8pAo-ICrVVd/view?usp=sharing)  
 - Unpack the zip to C:\Workbench\libpostal\
 - If you dont have **Workbench** folder in C Drive, then create one. 
 - Copy the zip inside the **Workbench** and unzip using [7zip](https://www.7-zip.org/download.html) 
