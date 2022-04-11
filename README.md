@@ -78,8 +78,19 @@ parsedAddress2 = parser.runParser("Washington, DC 20500, USA") #will be faster a
 parsedAddress3 = parser.runParser(" 20500, USA") #will be faster as usual
 parsedAddress4 = parser.runParser("Pennsylvania Avenue NW, Washington,") #will be faster as usual
 ```
+### 2. Expand the Address
+```python
+expandAddress = parser.expandTheAddress("District Science Cntr, Kokkirakulam Rd, Tirunelveli, TamilNadu 627009")
+print(expandAddress)
+```
+output
+```sh
+['district science center kokkirakulam road tirunelveli tamilnadu 627009',
+ 'district science connector kokkirakulam road tirunelveli tamilnadu 627009']
+```
 
-### 2. Terminate Address Parser Object
+
+### 3. Terminate Address Parser Object
 ```python
 parser.terminateParser()
 ```
