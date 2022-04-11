@@ -1,5 +1,5 @@
 from subprocess import Popen, PIPE
-
+import subprocess
 
 def stringToJSON(string):
     if not string in ['{}']:
@@ -56,6 +56,16 @@ class AddressParser:
                 break
             result += line
         return outputStripper(result)
+
+    def expandTheAddress(self,address):
+        address = removeSpeacialChars(address)
+        out = subprocess.Popen(['C:\Workbench\libpostal\src\libpostal.exe',
+                                address, '--json'],
+                               stdout=subprocess.PIPE,
+                               stderr=subprocess.STDOUT)
+
+        stdout, stderr = out.communicate()
+        return eval(stdout.decode("utf-8"))['expansions']
 
     def terminateParser(self):
         self.process.stdin.close()
