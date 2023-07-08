@@ -16,19 +16,19 @@ libpostal is a C library for parsing/normalizing street addresses around the wor
 
 ## Installation
 
-### 1. Build the libpostal in windows
-- Before usign the Python wrapper, you need to build the libpostal C library as a bundle which can be accessed by the python package. (still under development) 
+### 1. Build the libpostal in Windows
+- Before using the Python wrapper, you need to build the libpostal C library as a bundle which can be accessed by the python package. (still under development) 
 
 (OR)
 
 - Download and Install [MSYS2](https://www.msys2.org/)
 - You can use the libpostal prebuilt zipped file [Download here](https://drive.google.com/file/d/1fZUlyLFCGYD7l_PDM0NzD8pAo-ICrVVd/view?usp=sharing)  
 - Unpack the zip to C:\Workbench\libpostal\
-- If you dont have **Workbench** folder in C Drive, then create one. 
+- If you don't have **Workbench** folder in C Drive, then create one. 
 - Copy the zip inside the **Workbench** and unzip using [7zip](https://www.7-zip.org/download.html) 
 
-### 2 . Install the python wrapper 
-**Install using pip** . [Offical Python Package Here!!](https://pypi.org/project/pypostalwin/)
+### 2. Install the python wrapper 
+**Install using pip**. [Offical Python Package Here!!](https://pypi.org/project/pypostalwin/)
 ```shell
 pip install pypostalwin
 ```
@@ -51,8 +51,8 @@ import pypostalwin
 ### 1. Initialize Address Parser Object
 ```python
 parser = pypostalwin.AddressParser()
-parsedAddress = parser.runParser("The White House 1600 Pennsylvania Avenue NW, Washington, DC 20500, USA")
-print(parsedAddress)
+parsed_address = parser.parse_address("The White House 1600 Pennsylvania Avenue NW, Washington, DC 20500, USA")
+print(parsed_address)
 ```
 output
 ```sh
@@ -73,15 +73,15 @@ for eg:
 
 ```python
 parser = pypostalwin.AddressParser()
-parsedAddress1 = parser.runParser("The White House 1600") #only first time will take few seconds to load
-parsedAddress2 = parser.runParser("Washington, DC 20500, USA") #will be faster as usual
-parsedAddress3 = parser.runParser(" 20500, USA") #will be faster as usual
-parsedAddress4 = parser.runParser("Pennsylvania Avenue NW, Washington,") #will be faster as usual
+parsed_address1 = parser.parse_address("The White House 1600") #only first time will take few seconds to load
+parsed_address2 = parser.parse_address("Washington, DC 20500, USA") #will be faster as usual
+parsed_address3 = parser.parse_address(" 20500, USA") #will be faster as usual
+parsed_address4 = parser.parse_address("Pennsylvania Avenue NW, Washington,") #will be faster as usual
 ```
 ### 2. Expand the Address
 ```python
-expandAddress = parser.expandTheAddress("District Science Cntr, Kokkirakulam Rd, Tirunelveli, TamilNadu 627009")
-print(expandAddress)
+expanded_address = parser.expand_address("District Science Cntr, Kokkirakulam Rd, Tirunelveli, TamilNadu 627009")
+print(expanded_address)
 ```
 output
 ```sh
@@ -92,6 +92,6 @@ output
 
 ### 3. Terminate Address Parser Object
 ```python
-parser.terminateParser()
+parser.terminate_parser()
 ```
 
