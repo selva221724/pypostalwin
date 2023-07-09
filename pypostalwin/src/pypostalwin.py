@@ -1,73 +1,84 @@
-from subprocess import Popen, PIPE
 import subprocess
-
-def stringToJSON(string):
-    if not string in ['{}']:
-        string = string.replace('{  ', '')
-        string = string.replace('}', '')
-        string = string.replace('"', '')
-        string = string.split(",  ")
-        stringList = [i.split(': ') for i in string]
-        outDictList = []
-        for i in stringList:
-            outDictList.append({i[0]: i[1].rstrip().lstrip()})
-        return outDictList
-    else:
-        return {}
-
-
-def outputStripper(result):
-    result = result.split('Result:\n\n')[1].split('\n\n> ')[0].replace('\n', '')
-    result = stringToJSON(result)
-    return result
-
-
-def removeSpeacialChars(address):
-    b = {'≈': '', '≠': '', '>': '', '<': '', '+': '', '≥': '', '≤': '', '±': '', '*': '', '÷': '', '√': '',
-         '°': '', '⊥': '', '~': '', 'Δ': '', 'π': '', '≡': '', '≜': '', '∝': '', '∞': '', '≪': '', '≫': '',
-         '⌈': '', '⌉': '', '⌋': '', '⌊': '', '∑': '', '∏': '', 'γ': '', 'φ': '', '⊃': '', '⋂': '', '⋃': '',
-         'μ': '', 'σ': '', 'ρ': '', 'λ': '', 'χ': '', '⊄': '', '⊆': '', '⊂': '', '⊇': '', '⊅': '', '⊖': '',
-         '∈': '', '∉': '', '⊕': '', '⇒': '', '⇔': '', '↔': '', '∀': '', '∃': '', '∄': '', '∴': '', '∵': '',
-         'ε': '', '∫': '', '∮': '', '∯': '', '∰': '', 'δ': '', 'ψ': '', 'Θ': '', 'θ': '', 'α': '', 'β': '',
-         'ζ': '', 'η': '', 'ι': '', 'κ': '', 'ξ': '', 'τ': '', 'ω': '', '∇': ''}
-    for x, y in b.items():
-        address = address.replace(x, y)
-    return address
+import json
+import os
+import logging
 
 
 class AddressParser:
+    def __init__(self, address_parser_path, libpostal_path):
+        self.address_parser_path = self._validate_file(address_parser_path, "Address parser")
+        self.libpostal_path = self._validate_file(libpostal_path, "Libpostal")
 
-    def __init__(self):
-        self.exePath = r"C:\Workbench\libpostal\src\address_parser.exe"
-        self.process = Popen(self.exePath, shell=False, universal_newlines=True,
-                             stdin=PIPE, stdout=PIPE, stderr=PIPE)
+    @staticmethod
+    def _validate_file(file_path, name):
+        if not os.path.isfile(file_path) or not os.access(file_path, os.X_OK):
+            raise ValueError(f"{name} path is not a valid executable file: {file_path}")
+        return file_path
+
+    @staticmethod
+    def _validate_address(address):
+        if not isinstance(address, str) or not address.strip():
+            raise ValueError("Address must be a non-empty string")
+
+    @staticmethod
+    def _remove_special_chars(address):
+        special_chars = r"≈≠><+≥≤±*÷√°⊥~Δπ≡≜∝∞≪≫⌈⌉⌋⌊∑∏γφ⊃⋂⋃μσρλχ⊄⊆⊂⊇⊅⊖∈∉⊕⇒⇔↔∀∃∄∴∵ε∫∮∯∰δψΘθαβζηικξτω∇"
+        translator = str.maketrans("", "", special_chars)
+        return address.translate(translator)
+
+    def _run_command(self, command, input_data=None):
+        try:
+            process = subprocess.Popen(command, shell=False, universal_newlines=True,
+                                       stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            stdout, stderr = process.communicate(input_data)
+            return stdout.strip()
+
+        except subprocess.CalledProcessError as e:
+            logging.exception("Error occurred during command execution: %s", e)
+            raise
+
+    def parse_address(self, address):
+        self._validate_address(address)
+        address = self._remove_special_chars(address)
+        address = address + '\n'
+        command = [self.address_parser_path]
+        result = self._run_command(command, input_data=address)
+        json_start = result.find('{')
+        json_end = result.rfind('}') + 1
+        json_data = result[json_start:json_end]
+        return json.loads(json_data)
+
+
+
+    def expand_address(self, address):
+        self._validate_address(address)
+        address = self._remove_special_chars(address)
+        command = [self.libpostal_path, address, '--json']
+        result = self._run_command(command)
+        json_data = json.loads(result)
+        return json_data.get("expansions", [])
+
+    def terminate_parser(self):
         pass
 
-    def runParser(self, address):
-        address = removeSpeacialChars(address)
-        address = address + '\n'
-        self.process.stdin.write(address)
-        self.process.stdin.flush()
 
-        result = ''
-        for line in self.process.stdout:
-            if line == '}\n':
-                result += line
-                break
-            result += line
-        return outputStripper(result)
+if __name__ == '__main__':
+    address_parser_path = "<path-to-address-parser>"
+    libpostal_path = "<path-to-libpostal>"
 
-    def expandTheAddress(self,address):
-        address = removeSpeacialChars(address)
-        out = subprocess.Popen(['C:\Workbench\libpostal\src\libpostal.exe',
-                                address, '--json'],
-                               stdout=subprocess.PIPE,
-                               stderr=subprocess.STDOUT)
+    logging.basicConfig(level=logging.INFO)
 
-        stdout, stderr = out.communicate()
-        return eval(stdout.decode("utf-8"))['expansions']
+    parser = AddressParser(address_parser_path, libpostal_path)
 
-    def terminateParser(self):
-        self.process.stdin.close()
-        self.process.terminate()
-        self.process.wait()
+    address = "123 Main Street, City"
+    try:
+        parsed_address = parser.parse_address(address)
+        logging.info("Parsed Address: %s", parsed_address)
+    except (FileNotFoundError, RuntimeError) as e:
+        logging.exception("Failed to parse address: %s", e)
+
+    try:
+        expanded_address = parser.expand_address(address)
+        logging.info("Expanded Address: %s", expanded_address)
+    except (FileNotFoundError, RuntimeError) as e:
+        logging.exception("Failed to expand address: %s", e)
