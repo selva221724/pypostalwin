@@ -22,7 +22,7 @@ class AddressParser:
 
     @staticmethod
     def _remove_special_chars(address):
-        special_chars = r"≈≠><+≥≤±*÷√°⊥~Δπ≡≜∝∞≪≫⌈⌉⌋⌊∑∏γφ⊃⋂⋃μσρλχ⊄⊆⊂⊇⊅⊖∈∉⊕⇒⇔↔∀∃∄∴∵ε∫∮∯∰δψΘθαβζηικξτω∇"
+        special_chars = r"≈≠><+≥≤±*÷√°⊥~Δπ≡≜∝∞≪≫⌈⌉⌋⌊∑∏γφ⊃⋂⋃μσρλχ⊄⊆⊂⊇⊅⊖∈∉⊕⇒⇔↔∀∃∄∴∵ε∫∮∯∰δψΘθαβζηικξτω∇’"
         translator = str.maketrans("", "", special_chars)
         return address.translate(translator)
 
@@ -48,8 +48,6 @@ class AddressParser:
         json_data = result[json_start:json_end]
         return json.loads(json_data)
 
-
-
     def expand_address(self, address):
         self._validate_address(address)
         address = self._remove_special_chars(address)
@@ -63,14 +61,14 @@ class AddressParser:
 
 
 if __name__ == '__main__':
-    address_parser_path = "<path-to-address-parser>"
-    libpostal_path = "<path-to-libpostal>"
+    address_parser_path = r'C:\Workbench\libpostal\src\address_parser.exe'
+    libpostal_path = r'C:\Workbench\libpostal\src\libpostal.exe'
 
     logging.basicConfig(level=logging.INFO)
 
     parser = AddressParser(address_parser_path, libpostal_path)
 
-    address = "123 Main Street, City"
+    address = 'District Science Cntr, Kokkirakulam’ Rd, Tirunelveli, Tamil Nadu 627009'
     try:
         parsed_address = parser.parse_address(address)
         logging.info("Parsed Address: %s", parsed_address)
